@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="50%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded squircle -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)"/>
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="4"/>
+
+  <!-- Glowing Emblem -->
+  <g transform="translate(256, 256)" filter="url(#glow)">
+    <!-- Mountain / Open Book Silhouette -->
+    <path d="M-130 80 L0 -90 L130 80 L60 80 L0 -10 L-60 80 Z" fill="url(#goldGrad)" opacity="0.95"/>
+    <!-- Center Letter 'Б' -->
+    <text x="0" y="85" font-family="-apple-system, system-ui, 'Outfit', 'Plus Jakarta Sans', sans-serif" font-size="160" font-weight="900" fill="#ffffff" text-anchor="middle">Б</text>
+  </g>
+
+  <!-- Star sparks -->
+  <circle cx="160" cy="140" r="10" fill="#fbbf24" opacity="0.8"/>
+  <circle cx="360" cy="130" r="8" fill="#10b981" opacity="0.8"/>
+</svg>
