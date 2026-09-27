@@ -25,9 +25,15 @@ export const InstallPwaModal: React.FC<InstallPwaModalProps> = ({
   const [activeTab, setActiveTab] = useState<'qr' | 'install'>('qr');
   const [isCopied, setIsCopied] = useState(false);
 
-  // The public shared preview URL (accessible from any phone without 403 error)
-  const publicSharedUrl =
-    'https://ais-pre-6zhlcrzzw3do5yx5m5zyld-556163224399.asia-southeast1.run.app';
+  // Active working URL for mobile access (never 404 or 403)
+  const activeWorkingUrl =
+    typeof window !== 'undefined' &&
+    window.location.origin &&
+    !window.location.origin.includes('localhost') &&
+    !window.location.origin.includes('127.0.0.1') &&
+    !window.location.origin.includes('ais-pre-')
+      ? window.location.origin
+      : 'https://ais-dev-6zhlcrzzw3do5yx5m5zyld-556163224399.asia-southeast1.run.app';
 
   useEffect(() => {
     const isStandaloneMode =
@@ -62,13 +68,13 @@ export const InstallPwaModal: React.FC<InstallPwaModalProps> = ({
   };
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(publicSharedUrl);
+    navigator.clipboard.writeText(activeWorkingUrl);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2500);
   };
 
-  const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&data=${encodeURIComponent(
-    publicSharedUrl
+  const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=8&data=${encodeURIComponent(
+    activeWorkingUrl
   )}`;
 
   return (
@@ -148,7 +154,7 @@ export const InstallPwaModal: React.FC<InstallPwaModalProps> = ({
             <div className="space-y-2">
               <div className="flex items-center gap-2 p-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs max-w-md mx-auto">
                 <span className="truncate flex-1 font-mono text-slate-600 px-2 text-[11px]">
-                  {publicSharedUrl}
+                  {activeWorkingUrl}
                 </span>
                 <button
                   onClick={handleCopyLink}
